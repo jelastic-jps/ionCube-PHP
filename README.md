@@ -1,5 +1,5 @@
 # ionCube-PHP
-ionCube add-on for Jelastic PHP cloud environments
+ionCube loader add-on for Jelastic PHP cloud environments
 
 Both NGINX and Apache servers are supported.
 
