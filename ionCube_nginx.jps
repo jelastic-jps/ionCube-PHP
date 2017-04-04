@@ -1,0 +1,78 @@
+{
+  "jpsType": "update",
+  "jpsVersion": "0.8",
+  "application": {
+    "id": "ioncube-nginx",
+    "name": "ioncube-nginx",
+    "version": "6.0.x",
+    "type": "php",
+    "targetNodes": {
+      "nodeType": [
+        "nginxphp","nginxphp-dockerized"
+      ]
+    },
+    "homepage": "https://www.ioncube.com",
+    "logo": "https://www.ioncube.com/images/site_logo_small2015.png",
+    "description": {
+      "text": "ionCube - C extension for your Nginx PHP server(s). Versions supported: PHP 5.3.x,5.4.x,5.5.x/5.6.x/7.0.x"
+    },
+    "onInstall": {
+      "call": [
+        "installIonCube"
+      ]
+    },
+    "onUninstall": {
+      "call": "removeIonCube"
+    },
+    "procedures": [
+      {
+        "id": "removeIonCube",
+        "onCall": [
+          {
+            "executeShellCommands": [
+              {
+                "nodeMission": "cp",
+                "commands": [
+                  "sed -i \"/ioncube/d\" /etc/php.ini",
+                  "service php-fpm restart",
+                  "rm -rf /usr/lib64/php/modules/ioncube/"
+                ],
+                "user": "root"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "installIonCube",
+        "onCall": [
+          {
+            "executeShellCommands": [
+              {
+                "nodeMission": "cp",
+                "commands": [
+                  "mkdir /usr/lib64/php/modules/ioncube",
+                  "mkdir /usr/lib64/php/modules/ioncube",
+                  "wget -O /usr/lib64/php/modules/ioncube/ioncube_loader_lin_5.3.so https://github.com/jelastic-jps/ionCube-PHP/raw/master/modules/ioncube_loader_lin_5.3.so 2>&1",
+                  "wget -O /usr/lib64/php/modules/ioncube/ioncube_loader_lin_5.4.so https://github.com/jelastic-jps/ionCube-PHP/raw/master/modules/ioncube_loader_lin_5.4.so 2>&1",
+                  "wget -O /usr/lib64/php/modules/ioncube/ioncube_loader_lin_5.5.so https://github.com/jelastic-jps/ionCube-PHP/raw/master/modules/ioncube_loader_lin_5.5.so 2>&1",
+                  "wget -O /usr/lib64/php/modules/ioncube/ioncube_loader_lin_5.6.so https://github.com/jelastic-jps/ionCube-PHP/raw/master/modules/ioncube_loader_lin_5.6.so 2>&1",
+                  "wget -O /usr/lib64/php/modules/ioncube/ioncube_loader_lin_7.0.so https://github.com/jelastic-jps/ionCube-PHP/raw/master/modules/ioncube_loader_lin_7.0.so 2>&1",
+                  "chown -R nginx:nginx/usr/lib64/jelastic_php/ioncube",
+                  "wget -O /root/phpver.sh https://github.com/jelastic-jps/ionCube-PHP/raw/master/scripts/phpvertest.sh 2>&1",
+                  "/bin/sh /root/phpver.sh",
+                  "service php-fpm restart",
+                  "rm -rf /root/phpver.sh"
+                ],
+                "user": "root"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "success": {
+      "text": "The ionCube PHP extension is active on your server. Please see https://www.ioncube.com/loaders.php to get started."
+    }
+  }
+}
