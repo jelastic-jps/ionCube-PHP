@@ -28,7 +28,7 @@
       }
     },
     "homepage": "https://www.ioncube.com",
-    "logo": "https://www.ioncube.com/images/site_logo_small2015.png",
+    "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube_logo.png",
     "description": "&nbsp;&nbsp;- C extension for your Nginx PHP server(s). Versions supported: PHP 5.3.x,5.4.x,5.5.x/5.6.x/7.0.x",
     "onInstall": {
       "call": "installIonCube"
