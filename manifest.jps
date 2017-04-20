@@ -1,0 +1,97 @@
+{
+  "jpsType": "update",
+  "jpsVersion": "0.8",
+  "application": {
+    "id": "ioncube-nginx",
+    "name": "ioncube-nginx",
+    "version": "6.0.x",
+    "type": "php",
+    "globals": {
+      "modulesBaseUrl": "https://github.com/jelastic-jps/ionCube-PHP/raw/master/",
+      "ioncubePath": "/usr/lib64/php/modules/ioncube",
+      "tmpLog": "/tmp/ioncube_loader.log"
+    },
+    "targetNodes": {
+      "nodeType": [
+        "apache2",
+        "apache",
+        "nginxphp",
+        "nginxphp-dockerized"
+      ]
+    },
+    "env": {
+      "onAfterChangeEngine": {
+        "call": [
+          "removeIonCube",
+          "installIonCube"
+        ]
+      }
+    },
+    "homepage": "https://www.ioncube.com",
+    "logo": "https://www.ioncube.com/images/site_logo_small2015.png",
+    "description": "&nbsp;&nbsp;- C extension for your Nginx PHP server(s). Versions supported: PHP 5.3.x,5.4.x,5.5.x/5.6.x/7.0.x",
+    "onInstall": {
+      "call": "installIonCube"
+    },
+    "onUninstall": {
+      "call": "removeIonCube"
+    },
+    "procedures": [
+      {
+        "id": "removeIonCube",
+        "onCall": [
+          {
+            "executeShellCommands": {
+              "nodeMission": "cp",
+              "commands": [
+                "sed -i \"/ioncube/d\" /etc/php.ini",
+                "rm -rf ${globals.ioncubePath}/"
+              ],
+              "user": "root"
+            }
+          },
+          {
+            "restartNodes": {
+              "nodeMission": "cp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "installIonCube",
+        "onCall": [
+          {
+            "executeShellCommands": [
+              {
+                "nodeMission": "cp",
+                "commands": [
+                  "mkdir -p ${globals.ioncubePath}",
+                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.3.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.3.so > ${globals.tmpLog} 2>&1",
+                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.4.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.4.so > ${globals.tmpLog} 2>&1",
+                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.5.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.5.so > ${globals.tmpLog} 2>&1",
+                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.6.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.6.so > ${globals.tmpLog} 2>&1",
+                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_7.0.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_7.0.so > ${globals.tmpLog} 2>&1",
+                  "wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh > ${globals.tmpLog} 2>&1"
+                ]
+              },
+              {
+                "nodeMission": "cp",
+                "commands": [
+                  "/bin/sh /tmp/phpver.sh",
+                  "rm -rf /tmp/phpver.sh"
+                ],
+                "user": "root"
+              }
+            ]
+          },
+          {
+            "restartNodes": {
+              "nodeMission": "cp"
+            }
+          }
+        ]
+      }
+    ],
+    "success": "The ionCube PHP extension is active on your server. Please see <a href=\"https://www.ioncube.com/loaders.php\" target=\"_blank\">https://www.ioncube.com/loaders.php</a> to get started."
+  }
+}
