@@ -2,8 +2,8 @@
   "jpsType": "update",
   "jpsVersion": "0.8",
   "application": {
-    "id": "ioncube-nginx",
-    "name": "ioncube-nginx",
+    "id": "ioncube",
+    "name": "Ioncube",
     "version": "6.0.x",
     "type": "php",
     "globals": {
@@ -29,7 +29,7 @@
     },
     "homepage": "https://www.ioncube.com",
     "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube_logo.png",
-    "description": "&nbsp;&nbsp;- C extension for your Nginx PHP server(s). Versions supported: PHP 5.3.x,5.4.x,5.5.x/5.6.x/7.0.x",
+    "description": "&nbsp;&nbsp;- C extension for your PHP server(s). Versions supported: PHP 5.3.x,5.4.x,5.5.x/5.6.x/7.0.x",
     "onInstall": {
       "call": "installIonCube"
     },
