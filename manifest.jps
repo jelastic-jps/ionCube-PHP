@@ -28,7 +28,7 @@
       }
     },
     "homepage": "https://www.ioncube.com",
-    "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube_logo.png",
+    "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png",
     "description": {
 "text": "&nbsp;<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x.</div>",
 "short": "&nbsp;PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x."
