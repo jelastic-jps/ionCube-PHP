@@ -1,6 +1,6 @@
 # ionCube Loader Add-On 
 
-![ioncube-logo](images/ioncube-logo-small.png)
+![ioncube-logo](images/ioncube-logo.png)
 
 The [ionCube Loader](https://www.ioncube.com/loaders.php) is a PHP extension for running files that were preliminary secured with [ionCube Encoder](https://www.ioncube.com/php_encoder.php). Within Jelastic Cloud, the ionCube Loader decoder is provided as an applicable add-on for one-click installation.
 
