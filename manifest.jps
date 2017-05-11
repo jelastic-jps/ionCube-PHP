@@ -95,6 +95,6 @@
         ]
       }
     ],
-    "success": "The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the <b><i>php.ini</i></b> file in case any customizations are required.</br>For more information on ionCube usage, refer to the official <a href=\"https://www.ioncube.com/loaders.php\" target=\"_blank\">guidance</a>.</br>If something does not work as expected, please check the logs for more details or submit a question to <a href=\"https://stackoverflow.com/questions/tagged/jelastic\" target=\"_blank\">Jelastic community</a>.
+    "success": "The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the <b><i>php.ini</i></b> file in case any customizations are required.</br>For more information on ionCube usage, refer to the official <a href=\"https://www.ioncube.com/loaders.php\" target=\"_blank\">guidance</a>.</br>If something does not work as expected, please check the logs for more details or submit a question to <a href=\"https://stackoverflow.com/questions/tagged/jelastic\" target=\"_blank\">Jelastic community</a>".
   }
 }
