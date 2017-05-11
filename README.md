@@ -19,7 +19,7 @@ For more information about [Jelastic Add-Ons](https://github.com/jelastic-jps/jp
 
 To install the ionCube Loader add-on, copy link to the **_manifest.jps_** file above and [import](https://docs.jelastic.com/environment-import) it through the Jelastic dashboard at your [platform](https://jelastic.cloud/) (alternatively, it can be launched from the embedded [Jelastic Marketplace](https://docs.jelastic.com/marketplace#add-ons)).
 
-![ioncube-installation](images/ioncube-installation.png)
+![ioncube-installation](images/ioncube-install.png)
 
 In the appeared installation window, specify the following details:
 - **_Environment name_** - environment the ionCube tool should be integrated to (encoded-app in our case)
