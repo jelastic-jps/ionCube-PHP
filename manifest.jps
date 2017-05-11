@@ -3,7 +3,7 @@
   "jpsVersion": "0.8",
   "application": {
     "id": "ioncube",
-    "name": "Ioncube",
+    "name": "Ioncube Add-On",
     "version": "6.0.x",
     "type": "php",
     "globals": {
