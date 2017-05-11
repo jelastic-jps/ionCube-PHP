@@ -15,7 +15,7 @@ The [ionCube Loader](https://www.ioncube.com/loaders.php) is a PHP extension for
 
 For more information about [Jelastic Add-Ons](https://github.com/jelastic-jps/jpswiki/wiki/Jelastic-Addons) and their usage, refer to the linked guide.
 
-## How to Install Loader to Jelastic Environmental
+## How to Install Loader to Jelastic Environment
 
 To install the ionCube Loader add-on, copy link to the **_manifest.jps_** file above and [import](https://docs.jelastic.com/environment-import) it through the Jelastic dashboard at your [platform](https://jelastic.cloud/) (alternatively, it can be launched from the embedded [Jelastic Marketplace](https://docs.jelastic.com/marketplace#add-ons)).
 
@@ -37,7 +37,7 @@ Here, you can point Loader to the server location with your encoded files (or di
 
 ## Known Limitations on PHP Versions Compatibility
 
-When selecting a particular engine, you need to consider it’s compatibility with ionCube Encoder version your scripts were initially converted with. As a general rule of thumb, encoded files could be processed on PHP versions that are equal to and higher than the source Encoder language, i.e. the full backward compatibility is provided. However, there are a few exceptions:
+When selecting a particular engine, you need to consider its compatibility with ionCube Encoder version your scripts were initially converted with. As a general rule of thumb, encoded files could be processed on PHP versions that are equal to and higher than the source Encoder language, i.e. the full backward compatibility is provided. However, there are a few exceptions:
 - currently, *PHP 7.1* is not supported 
 - with *PHP 7.0* engine, only *PHP 5.6*-based files can be decoded
 - with *PHP 5.6* and *PHP 5.5*, scripts of *PHP 4* version can’t be decoded
