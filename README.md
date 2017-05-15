@@ -15,7 +15,7 @@ The [ionCube Loader](https://www.ioncube.com/loaders.php) is a PHP extension for
 
 For more information about [Jelastic Add-Ons](https://github.com/jelastic-jps/jpswiki/wiki/Jelastic-Addons) and their usage, refer to the linked guide.
 
-## How to Install Loader to Jelastic Environment
+## How to Install ionCube Loader to Jelastic Environment
 
 To install the ionCube Loader add-on, copy link to the **_manifest.jps_** file above and [import](https://docs.jelastic.com/environment-import) it through the Jelastic dashboard at your [platform](https://jelastic.cloud/) (alternatively, it can be launched from the embedded [Jelastic Marketplace](https://docs.jelastic.com/marketplace#add-ons)).
 
