@@ -1,100 +1,65 @@
 {
-  "jpsType": "update",
-  "jpsVersion": "0.8",
-  "application": {
-    "id": "ioncube",
-    "name": "Ioncube Add-On",
-    "version": "6.0.x",
-    "type": "php",
-    "globals": {
-      "modulesBaseUrl": "https://github.com/jelastic-jps/ionCube-PHP/raw/master/",
-      "ioncubePath": "/usr/lib64/php/modules/ioncube",
-      "tmpLog": "/tmp/ioncube_loader.log"
-    },
-    "targetNodes": {
-      "nodeType": [
-        "apache2",
-        "apache",
-        "nginxphp",
-        "nginxphp-dockerized"
-      ]
-    },
-    "env": {
-      "onAfterChangeEngine": {
-        "call": [
-          "removeIonCube",
-          "installIonCube"
-        ]
-      }
-    },
-    "homepage": "https://www.ioncube.com",
-    "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png",
-    "description": {
-"text": "<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x.</div>",
-"short": "PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x."
-},
-    "onInstall": {
-      "call": "installIonCube"
-    },
-    "onUninstall": {
-      "call": "removeIonCube"
-    },
-    "procedures": [
+  "type": "update",
+  "version": "1.0",
+  "id": "ioncube",
+  "name": "Ioncube Add-On",
+  "globals": {
+    "modulesBaseUrl": "https://github.com/jelastic-jps/ionCube-PHP/raw/master/",
+    "ioncubePath": "/usr/lib64/php/modules/ioncube",
+    "tmpLog": "/tmp/ioncube_loader.log"
+  },
+  "targetNodes": {
+    "nodeType": [
+      "apache2",
+      "apache",
+      "nginxphp",
+      "nginxphp-dockerized"
+    ]
+  },
+  "onAfterChangeEngine": [
+    "removeIonCube",
+    "installIonCube"
+  ],
+  "homepage": "https://www.ioncube.com",
+  "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png",
+  "description": {
+    "text": "<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x.</div>",
+    "short": "PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x."
+  },
+  "onInstall": "installIonCube",
+  "onUninstall": "removeIonCube",
+  "actions": {
+    "removeIonCube": [
       {
-        "id": "removeIonCube",
-        "onCall": [
-          {
-            "executeShellCommands": {
-              "nodeMission": "cp",
-              "commands": [
-                "sed -i \"/ioncube/d\" /etc/php.ini",
-                "rm -rf ${globals.ioncubePath}/"
-              ],
-              "user": "root"
-            }
-          },
-          {
-            "restartNodes": {
-              "nodeMission": "cp"
-            }
-          }
-        ]
+        "cmd [${targetNodes.nodeGroup}]": {
+          "commands": [
+            "sed -i \"/ioncube/d\" /etc/php.ini",
+            "rm -rf ${globals.ioncubePath}/"
+          ]
+        }
       },
       {
-        "id": "installIonCube",
-        "onCall": [
-          {
-            "executeShellCommands": [
-              {
-                "nodeMission": "cp",
-                "commands": [
-                  "mkdir -p ${globals.ioncubePath}",
-                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.3.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.3.so > ${globals.tmpLog} 2>&1",
-                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.4.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.4.so > ${globals.tmpLog} 2>&1",
-                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.5.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.5.so > ${globals.tmpLog} 2>&1",
-                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.6.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.6.so > ${globals.tmpLog} 2>&1",
-                  "wget -O ${globals.ioncubePath}/ioncube_loader_lin_7.0.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_7.0.so > ${globals.tmpLog} 2>&1",
-                  "wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh > ${globals.tmpLog} 2>&1"
-                ]
-              },
-              {
-                "nodeMission": "cp",
-                "commands": [
-                  "/bin/sh /tmp/phpver.sh",
-                  "rm -rf /tmp/phpver.sh"
-                ],
-                "user": "root"
-              }
-            ]
-          },
-          {
-            "restartNodes": {
-              "nodeMission": "cp"
-            }
-          }
-        ]
+        "restartNodes": {
+          "nodeMission": "cp"
+        }
       }
     ],
-    "success": "The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the <b><i>php.ini</i></b> file in case any customizations are required.</br>For more information on ionCube usage, refer to the official <a href=\"https://www.ioncube.com/loaders.php\" target=\"_blank\">guidance</a>.</br>If something does not work as expected, please check the logs for more details or submit a question to <a href=\"https://stackoverflow.com/questions/tagged/jelastic\" target=\"_blank\">Jelastic community</a>."
-  }
+    "installIonCube": [
+      {
+        "cmd [${targetNodes.nodeGroup}]": [
+          "mkdir -p ${globals.ioncubePath}",
+          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.3.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.3.so > ${globals.tmpLog} 2>&1",
+          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.4.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.4.so > ${globals.tmpLog} 2>&1",
+          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.5.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.5.so > ${globals.tmpLog} 2>&1",
+          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.6.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.6.so > ${globals.tmpLog} 2>&1",
+          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_7.0.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_7.0.so > ${globals.tmpLog} 2>&1",
+          "wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh > ${globals.tmpLog} 2>&1",
+          "/bin/sh /tmp/phpver.sh",
+          "rm -rf /tmp/phpver.sh"
+        ]
+      },
+      "restartNodes [${targetNodes.nodeGroup}]"
+    ]
+  },
+  "success": "The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the <b><i>php.ini</i></b> file in case any customizations are required.</br>For more information on ionCube usage, refer to the official <a href=\"https://www.ioncube.com/loaders.php\" target=\"_blank\">guidance</a>.</br>If something does not work as expected, please check the logs for more details or submit a question to <a href=\"https://stackoverflow.com/questions/tagged/jelastic\" target=\"_blank\">Jelastic community</a>."
 }
