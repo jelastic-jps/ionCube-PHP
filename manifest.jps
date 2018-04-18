@@ -48,15 +48,13 @@
       {
         "cmd [${targetNodes.nodeGroup}]": [
           "mkdir -p ${globals.ioncubePath}",
-          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.3.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.3.so > ${globals.tmpLog} 2>&1",
-          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.4.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.4.so > ${globals.tmpLog} 2>&1",
-          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.5.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.5.so > ${globals.tmpLog} 2>&1",
-          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_5.6.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_5.6.so > ${globals.tmpLog} 2>&1",
-          "wget -O ${globals.ioncubePath}/ioncube_loader_lin_7.0.so ${globals.modulesBaseUrl}modules/ioncube_loader_lin_7.0.so > ${globals.tmpLog} 2>&1",
-          "wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh > ${globals.tmpLog} 2>&1",
-          "/bin/sh /tmp/phpver.sh",
+          "curl -fslL 'https://github.com/jelastic-jps/ionCube-PHP/blob/master/modules/ioncube.zip?raw=true' -o ${globals.ioncubePath}/ioncube.zip >> ${globals.tmpLog} 2>&1",
+          "unzip -o ${globals.ioncubePath}/ioncube.zip -d ${globals.ioncubePath} >> ${globals.tmpLog} 2>&1",
+          "wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh >> ${globals.tmpLog} 2>&1",
+          "/bin/sh /tmp/phpver.sh >> ${globals.tmpLog} 2>&1",
           "rm -rf /tmp/phpver.sh"
-        ]
+        ],
+        "user": "root"
       },
       "restartNodes [${targetNodes.nodeGroup}]"
     ]
