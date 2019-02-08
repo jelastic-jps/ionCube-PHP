@@ -23,20 +23,19 @@
   "homepage": "https://www.ioncube.com",
   "logo": "https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png",
   "description": {
-    "text": "<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x.</div>",
-    "short": "PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, and 7.0.x."
+    "text": "<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, 7.0.x., 7.1.x, 7.2.x and 7.3.x.</div>",
+    "short": "PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, 7.0.x., 7.1.x, 7.2.x and 7.3.x"
   },
   "onInstall": "installIonCube",
   "onUninstall": "removeIonCube",
   "actions": {
     "removeIonCube": [
       {
-        "cmd [${targetNodes.nodeGroup}]": {
-          "commands": [
-            "sed -i \"/ioncube/d\" /etc/php.ini",
-            "rm -rf ${globals.ioncubePath}/"
-          ]
-        }
+        "cmd [${targetNodes.nodeGroup}]": [
+          "sed -i \"/ioncube/d\" /etc/php.ini",
+          "rm -rf ${globals.ioncubePath}/"
+        ],
+        "user": "root"
       },
       {
         "restartNodes": {
