@@ -1,25 +1,31 @@
 type: update
-version: '1.0'
+version: 1.0
 id: ioncube
 name: ionCube Add-On
+
 globals:
   modulesBaseUrl: https://github.com/jelastic-jps/ionCube-PHP/raw/master/
-  ioncubePath: "/usr/lib64/php/modules/ioncube"
-  tmpLog: "/tmp/ioncube_loader.log"
+  ioncubePath: /usr/lib64/php/modules/ioncube
+  tmpLog: /tmp/ioncube_loader.log
+
 targetNodes:
   nodeType:
   - apache2
   - apache
   - nginxphp
   - nginxphp-dockerized
+
 onAfterChangeEngine:
   - removeIonCube
   - installIonCube
 homepage: https://www.ioncube.com
 logo: https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png
 description:
-  text: "<span>PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.</span><div>Supported programming language versions: PHP 5.3.x, 5.4.x, 5.5.x, 5.6.x, 7.0.x., 7.1.x, 7.2.x and 7.3.x.</div>"
-  short: 'PHP extension for running ionCube-encoded files. Supported PHP versions: 5.3.x, 5.4.x, 5.5.x, 5.6.x, 7.0.x., 7.1.x, 7.2.x and 7.3.x'
+  text: |
+    PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.    
+    Supported programming language versions: PHP 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x
+  short: "PHP extension for running ionCube-encoded files. Supported PHP versions: 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x"
+
 onInstall: installIonCube
 onUninstall: removeIonCube
 actions:
@@ -36,8 +42,11 @@ actions:
     - curl -fslL 'https://github.com/jelastic-jps/ionCube-PHP/blob/master/modules/ioncube.zip?raw=true' -o ${globals.ioncubePath}/ioncube.zip >> ${globals.tmpLog} 2>&1
     - unzip -o ${globals.ioncubePath}/ioncube.zip -d ${globals.ioncubePath} >> ${globals.tmpLog} 2>&1
     - wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh?_r=${fn.random} >> ${globals.tmpLog} 2>&1
-    - "/bin/sh /tmp/phpver.sh >> ${globals.tmpLog} 2>&1"
+    - /bin/sh /tmp/phpver.sh >> ${globals.tmpLog} 2>&1
     - rm -rf /tmp/phpver.sh
     user: root
   - restartNodes [${targetNodes.nodeGroup}]
-success: The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the <b><i>php.ini</i></b> file in case any customizations are required.</br>For more information on ionCube usage, refer to the official <a href="https://www.ioncube.com/loaders.php" target="_blank">guidance</a>.</br>If something does not work as expected, please check the logs for more details or submit a question to <a href="https://stackoverflow.com/questions/tagged/jelastic" target="_blank">Jelastic community</a>.
+success: |
+  The ionCube Loader is enabled at your application server and ready to process the encoded files. Use the ***php.ini*** file in case any customizations are required.  
+  For more information on ionCube usage, refer to the official [guidance](https://www.ioncube.com/loaders.php). 
+  If something does not work as expected, please check the logs for more details or submit a question to [Jelastic community](https://stackoverflow.com/questions/tagged/jelastic).
