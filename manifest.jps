@@ -23,8 +23,8 @@ logo: https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/i
 description:
   text: |
     PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.    
-    Supported programming language versions: PHP 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x
-  short: "PHP extension for running ionCube-encoded files. Supported PHP versions: 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x"
+    Supported programming language versions: PHP 8.1.x, 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x
+  short: "PHP extension for running ionCube-encoded files. Supported PHP versions: 8.1.x, 7.4.x, 7.3.x, 7.2.x., 7.1.x, 7.0.x, 5.6.x, 5.5.x 5.4.x and 5.4.x"
 
 onInstall: installIonCube
 onUninstall: removeIonCube
