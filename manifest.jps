@@ -1,11 +1,11 @@
 type: update
-version: 1.0
+version: 1.6
 id: ioncube
 name: ionCube Add-On
 
 globals:
   modulesBaseUrl: https://github.com/jelastic-jps/ionCube-PHP/raw/master/
-  ioncubePath: /usr/lib64/php/modules/ioncube
+  ioncubePath: /usr/lib64/php/modules/
   tmpLog: /tmp/ioncube_loader.log
 
 targetNodes:
