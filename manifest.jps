@@ -3,6 +3,8 @@ version: 1.6
 id: ioncube
 name: ionCube Add-On
 
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/
+
 globals:
   modulesBaseUrl: https://github.com/jelastic-jps/ionCube-PHP/raw/master/
   ioncubePath: /usr/lib64/php/modules/
@@ -18,8 +20,9 @@ targetNodes:
 onAfterChangeEngine:
   - removeIonCube
   - installIonCube
+
 homepage: https://www.ioncube.com
-logo: https://raw.githubusercontent.com/jelastic-jps/ionCube-PHP/master/images/ioncube.png
+logo: /images/ioncube.png
 description:
   text: |
     PHP extension for running ionCube-encoded files on Apache and NGINX-PHP application servers.    
@@ -28,6 +31,7 @@ description:
 
 onInstall: installIonCube
 onUninstall: removeIonCube
+
 actions:
   removeIonCube:
   - cmd [${targetNodes.nodeGroup}]:
@@ -39,11 +43,11 @@ actions:
   installIonCube:
   - cmd [${targetNodes.nodeGroup}]:
     - mkdir -p ${globals.ioncubePath}
-    - curl -fslL 'https://github.com/jelastic-jps/ionCube-PHP/blob/master/modules/ioncube.zip?raw=true' -o ${globals.ioncubePath}/ioncube.zip >> ${globals.tmpLog} 2>&1
+    - curl -fslL '${baseUrl}modules/ioncube.zip?raw=true' -o ${globals.ioncubePath}/ioncube.zip >> ${globals.tmpLog} 2>&1
     - unzip -o ${globals.ioncubePath}/ioncube.zip -d ${globals.ioncubePath} >> ${globals.tmpLog} 2>&1
-    - wget -O /tmp/phpver.sh ${globals.modulesBaseUrl}scripts/phpvertest.sh?_r=${fn.random} >> ${globals.tmpLog} 2>&1
-    - /bin/sh /tmp/phpver.sh >> ${globals.tmpLog} 2>&1
-    - rm -rf /tmp/phpver.sh
+    - wget -O /tmp/defineIoncubeLoader.sh ${baseUrl}scripts/defineIoncubeLoader.sh?_r=${fn.random} >> ${globals.tmpLog} 2>&1
+    - /bin/sh /tmp/defineIoncubeLoader.sh >> ${globals.tmpLog} 2>&1
+    - rm -rf /tmp/defineIoncubeLoader.sh
     user: root
   - restartNodes [${targetNodes.nodeGroup}]
 success: |
